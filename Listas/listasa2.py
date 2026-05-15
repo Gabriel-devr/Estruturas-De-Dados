@@ -48,21 +48,34 @@ class Lista:
                 atual=atual.prev
             return True
         
-    def remocaoElemento(self,x):#tá errado veja
-        if(self.prim is not None):
-            if (self.prim.dado==x):
-                if (self.prim==self.ult):
-                    self.prim=None
-                    self.ult=None
-            atual=self.prim
-            while(atual.dado!=x and atual is not None):
-                atual=atual.prox
-            if (atual.dado==x):
-                atual.prev.prox=atual.prox
-                atual.prox.prev=atual.prev
-                return True
+    def remocaoElemento(self, x):
+        if self.prim is None:
+            return False
+    
+        atual = self.prim
+    
+        while atual is not None and atual.dado != x:
+            atual = atual.prox
+    
+        if atual is None:
+            return False
+    
+        if atual == self.prim:
+            self.prim = atual.prox
+            if self.prim is not None:
+                self.prim.prev = None
             else:
-                return False
+                self.ult = None
+    
+        elif atual == self.ult:
+            self.ult = atual.prev
+            self.ult.prox = None
+    
+        else:
+            atual.prev.prox = atual.prox
+            atual.prox.prev = atual.prev
+    
+        return True
         
 minhaLista = Lista()
 minhaLista.inserirNaCabeca(10)
