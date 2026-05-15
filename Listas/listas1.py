@@ -73,6 +73,27 @@ class Lista:
             return soma
         else:
             return 0
+
+    def remover(self, x):
+        if self.prim is None:
+            return False
+    
+        if self.prim.dado == x:
+            self.prim = self.prim.prox
+            return True
+    
+        anterior = self.prim
+        atual = self.prim.prox
+    
+        while atual is not None:
+            if atual.dado == x:
+                anterior.prox = atual.prox
+                return True
+            
+            anterior = atual
+            atual = atual.prox
+    
+        return False
         
 minha_lista=Lista()
 minha_lista.adicionarNoInicio(1)
@@ -80,4 +101,5 @@ minha_lista.adicionarNoInicio(2)
 minha_lista.adicionarNoInicio(3)
 minha_lista.adicionarNoInicio(1)
 minha_lista.adicionarNoInicio(5)
+minha_lista.remover(3)
 print(minha_lista.somaDosQuadrados())
